@@ -12,10 +12,10 @@ Activity.init(
             type: DataTypes.STRING,
         },
         duration: {
-            type: DataTypes.STRING,
+            type: DataTypes.FLOAT,
         },
         price: {
-            type: DataTypes.STRING,
+            type: DataTypes.FLOAT,
         },
         prioriy: {
             type: DataTypes.FLOAT,
