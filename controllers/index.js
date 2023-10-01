@@ -5,12 +5,12 @@ const tripRoutes = require("./tripRoutes");
 const userRoutes = require("./userRoutes");
 
 router.get("/", (req, res) => {
-    res.render("home");
+    res.render("home", { loggedIn: req.session.loggedIn });
 });
 
 // router.use("/activity", activityRoutes);
 // router.use("/day", dayRoutes);
 // router.use("/trip", tripRoutes);
-// router.use("/user", userRoutes);
+router.use("/user", userRoutes);
 
 module.exports = router;

@@ -1,0 +1,11 @@
+<h1>Dashboard</h1>
+{{!-- If user is logged in, show their posts.  --}}
+{{#if loggedIn}}
+{{#each plainTrips as |trip|}}
+{{> tripPreview}}
+{{/each}}
+
+{{else}}
+{{!-- If not logged in, prompt them to log in --}}
+<p>Please <span><a href="/login">log in</a></span> to view your dashboard</p>
+{{/if}}
