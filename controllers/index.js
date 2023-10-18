@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 // router.use("/activity", activityRoutes);
 // router.use("/day", dayRoutes);
-// router.use("/trip", tripRoutes);
+router.use("/trip", tripRoutes);
 router.use("/user", userRoutes);
 
 module.exports = router;
