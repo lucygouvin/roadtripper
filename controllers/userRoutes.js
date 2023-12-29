@@ -1,12 +1,36 @@
 const router = require("express").Router();
 const { User, Trip } = require("../models");
 
+// GET the sign up page
+router.get("/signup", (req, res) => {
+    res.render("signup");
+});
+
+// POST create new user
+router.post("/signup", async (req, res) => {
+    try {
+        const userData = await User.create({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+        });
+
+        req.session.loggedIn = true;
+        req.session.user = userData.username;
+        req.session.userid = userData.id;
+        req.session.save();
+        res.status(200).send();
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // GET the login page
 router.get("/login", (req, res) => {
     res.render("login");
 });
 
-// Log in
+// POST Log in
 router.post("/login", async (req, res) => {
     try {
         const dbUser = await User.findOne({
@@ -41,7 +65,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// Log out
+// POST Log out
 router.post("/logout", async (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -52,6 +76,7 @@ router.post("/logout", async (req, res) => {
     }
 });
 
+// Dashboard
 router.get("/dashboard", async (req, res) => {
     try {
         if (req.session.userid) {
